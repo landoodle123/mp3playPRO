@@ -1,6 +1,5 @@
 using System;
 using System.Windows.Forms;
-using WMPLib;
 
 namespace MP3Player
 {
@@ -13,7 +12,7 @@ namespace MP3Player
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Timer stateCheckTimer; // Explicit Timer declaration
+        private System.Windows.Forms.ProgressBar progressBar1; // Progress bar declaration
 
         protected override void Dispose(bool disposing)
         {
@@ -26,7 +25,6 @@ namespace MP3Player
 
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             btnPause = new Button();
             btnStop = new Button();
@@ -34,7 +32,7 @@ namespace MP3Player
             openFileDialog1 = new OpenFileDialog();
             label1 = new Label();
             button1 = new Button();
-            stateCheckTimer = new System.Windows.Forms.Timer(components);
+            progressBar1 = new ProgressBar();
             SuspendLayout();
             // 
             // btnPause
@@ -95,16 +93,20 @@ namespace MP3Player
             button1.Visible = false;
             button1.Click += btnResume_Click;
             // 
-            // stateCheckTimer
+            // progressBar1
             // 
-            stateCheckTimer.Interval = 500;
-            stateCheckTimer.Tick += StateCheckTimer_Tick;
+            progressBar1.Location = new Point(12, 182);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(347, 23);
+            progressBar1.Style = ProgressBarStyle.Continuous;
+            progressBar1.TabIndex = 7;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(365, 188);
+            ClientSize = new Size(365, 220);
+            Controls.Add(progressBar1);
             Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(btnOpenFile);
