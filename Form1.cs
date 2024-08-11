@@ -7,12 +7,13 @@ namespace MP3Player
     public partial class Form1 : Form
     {
         private WindowsMediaPlayer WindowsMediaPlayer;
+        private System.Windows.Forms.Timer progressBarTimer;
 
         public Form1()
         {
             InitializeComponent();
             InitializeWindowsMediaPlayer();
-            InitializeStateCheckTimer();
+            InitializeProgressBarTimer();
         }
 
         private void InitializeWindowsMediaPlayer()
@@ -21,28 +22,35 @@ namespace MP3Player
             WindowsMediaPlayer.PlayStateChange += WindowsMediaPlayer_PlayStateChange;
         }
 
-        private void InitializeStateCheckTimer()
+        private void InitializeProgressBarTimer()
         {
-            System.Windows.Forms.Timer stateCheckTimer = new System.Windows.Forms.Timer();
-            stateCheckTimer.Interval = 5;
-            stateCheckTimer.Tick += StateCheckTimer_Tick;
-            stateCheckTimer.Start();
+            progressBarTimer = new System.Windows.Forms.Timer();
+            progressBarTimer.Interval = 5;
+            progressBarTimer.Tick += ProgressBarTimer_Tick;
+            progressBarTimer.Start();
         }
 
-        private void StateCheckTimer_Tick(object sender, EventArgs e)
+        private void ProgressBarTimer_Tick(object sender, EventArgs e)
         {
-            if (WindowsMediaPlayer != null)
+            if (WindowsMediaPlayer != null && WindowsMediaPlayer.currentMedia != null)
             {
-                if (WindowsMediaPlayer.playState == WMPPlayState.wmppsPaused)
-                {
-                    button1.Visible = true;
-                    button1.Enabled = true;
-                }
-                else
-                {
-                    button1.Visible = false;
-                    button1.Enabled = false;
-                }
+                // Update the progress bar value
+                progressBar1.Maximum = (int)WindowsMediaPlayer.currentMedia.duration;
+                progressBar1.Value = (int)WindowsMediaPlayer.controls.currentPosition;
+            }
+        }
+
+        private void WindowsMediaPlayer_PlayStateChange(int newState)
+        {
+            if (newState == (int)WMPPlayState.wmppsPaused)
+            {
+                button1.Visible = true;
+                button1.Enabled = true;
+            }
+            else
+            {
+                button1.Visible = false;
+                button1.Enabled = false;
             }
         }
 
@@ -69,6 +77,7 @@ namespace MP3Player
             {
                 WindowsMediaPlayer.controls.stop();
                 label1.Text = "No file loaded";
+                progressBar1.Value = 0; // Reset progress bar
             }
         }
 
@@ -92,11 +101,6 @@ namespace MP3Player
             {
                 WindowsMediaPlayer.controls.play(); // Resume playback from the current position
             }
-        }
-
-        private void WindowsMediaPlayer_PlayStateChange(int newState)
-        {
-            // Optional: Handle play state changes here
         }
     }
 }
