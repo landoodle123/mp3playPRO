@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using WMPLib;
 
@@ -7,12 +7,13 @@ namespace MP3Player
     partial class Form1 : Form
     {
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnOpenFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private WindowsMediaPlayer windowsMediaPlayer1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer stateCheckTimer; // Explicit Timer declaration
 
         protected override void Dispose(bool disposing)
         {
@@ -25,29 +26,22 @@ namespace MP3Player
 
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            btnPlay = new Button();
             btnPause = new Button();
             btnStop = new Button();
             btnOpenFile = new Button();
             openFileDialog1 = new OpenFileDialog();
+            label1 = new Label();
+            button1 = new Button();
+            stateCheckTimer = new System.Windows.Forms.Timer(components);
             SuspendLayout();
-            // 
-            // btnPlay
-            // 
-            btnPlay.Location = new Point(12, 12);
-            btnPlay.Name = "btnPlay";
-            btnPlay.Size = new Size(137, 98);
-            btnPlay.TabIndex = 1;
-            btnPlay.Text = "Play";
-            btnPlay.UseVisualStyleBackColor = true;
-            btnPlay.Click += btnPlay_Click;
             // 
             // btnPause
             // 
-            btnPause.Location = new Point(83, 116);
+            btnPause.Location = new Point(11, 12);
             btnPause.Name = "btnPause";
-            btnPause.Size = new Size(66, 22);
+            btnPause.Size = new Size(138, 98);
             btnPause.TabIndex = 2;
             btnPause.Text = "Pause";
             btnPause.UseVisualStyleBackColor = true;
@@ -57,7 +51,7 @@ namespace MP3Player
             // 
             btnStop.Location = new Point(12, 116);
             btnStop.Name = "btnStop";
-            btnStop.Size = new Size(66, 22);
+            btnStop.Size = new Size(137, 60);
             btnStop.TabIndex = 3;
             btnStop.Text = "Stop";
             btnStop.UseVisualStyleBackColor = true;
@@ -78,19 +72,49 @@ namespace MP3Player
             openFileDialog1.Filter = "MP3 Files|*.mp3";
             openFileDialog1.Title = "Select an MP3 File";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(159, 119);
+            label1.MaximumSize = new Size(200, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(81, 15);
+            label1.TabIndex = 5;
+            label1.Text = "No file loaded";
+            label1.Click += label1_Click;
+            // 
+            // button1
+            // 
+            button1.Enabled = false;
+            button1.Location = new Point(12, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(137, 98);
+            button1.TabIndex = 6;
+            button1.Text = "Resume";
+            button1.UseVisualStyleBackColor = true;
+            button1.Visible = false;
+            button1.Click += btnResume_Click;
+            // 
+            // stateCheckTimer
+            // 
+            stateCheckTimer.Interval = 500;
+            stateCheckTimer.Tick += StateCheckTimer_Tick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(371, 333);
+            ClientSize = new Size(365, 188);
+            Controls.Add(button1);
+            Controls.Add(label1);
             Controls.Add(btnOpenFile);
             Controls.Add(btnStop);
             Controls.Add(btnPause);
-            Controls.Add(btnPlay);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "mp3playPRO";
             ResumeLayout(false);
+            PerformLayout();
         }
     }
 }
