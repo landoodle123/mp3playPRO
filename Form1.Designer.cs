@@ -37,21 +37,21 @@ namespace MP3Player
             // 
             // btnPause
             // 
+            btnPause.Image = (Image)resources.GetObject("btnPause.Image");
             btnPause.Location = new Point(11, 12);
             btnPause.Name = "btnPause";
             btnPause.Size = new Size(138, 98);
             btnPause.TabIndex = 2;
-            btnPause.Text = "Pause";
             btnPause.UseVisualStyleBackColor = true;
             btnPause.Click += btnPause_Click;
             // 
             // btnStop
             // 
+            btnStop.Image = (Image)resources.GetObject("btnStop.Image");
             btnStop.Location = new Point(12, 116);
             btnStop.Name = "btnStop";
             btnStop.Size = new Size(137, 60);
             btnStop.TabIndex = 3;
-            btnStop.Text = "Stop";
             btnStop.UseVisualStyleBackColor = true;
             btnStop.Click += btnStop_Click;
             // 
@@ -84,11 +84,11 @@ namespace MP3Player
             // button1
             // 
             button1.Enabled = false;
+            button1.Image = (Image)resources.GetObject("button1.Image");
             button1.Location = new Point(12, 12);
             button1.Name = "button1";
             button1.Size = new Size(137, 98);
             button1.TabIndex = 6;
-            button1.Text = "Resume";
             button1.UseVisualStyleBackColor = true;
             button1.Visible = false;
             button1.Click += btnResume_Click;
