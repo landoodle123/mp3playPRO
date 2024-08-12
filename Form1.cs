@@ -25,7 +25,7 @@ namespace MP3Player
         private void InitializeProgressBarTimer()
         {
             progressBarTimer = new System.Windows.Forms.Timer();
-            progressBarTimer.Interval = 5;
+            progressBarTimer.Interval = 10;
             progressBarTimer.Tick += ProgressBarTimer_Tick;
             progressBarTimer.Start();
         }
