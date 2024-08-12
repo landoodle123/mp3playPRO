@@ -6,7 +6,7 @@ namespace MP3Player
 {
     public partial class Form1 : Form
     {
-        private WindowsMediaPlayer WindowsMediaPlayer;
+        private WindowsMediaPlayer windowsMediaPlayer;
         private System.Windows.Forms.Timer progressBarTimer;
 
         public Form1()
@@ -18,8 +18,8 @@ namespace MP3Player
 
         private void InitializeWindowsMediaPlayer()
         {
-            WindowsMediaPlayer = new WindowsMediaPlayer();
-            WindowsMediaPlayer.PlayStateChange += WindowsMediaPlayer_PlayStateChange;
+            windowsMediaPlayer = new WindowsMediaPlayer();
+            windowsMediaPlayer.PlayStateChange += WindowsMediaPlayer_PlayStateChange;
         }
 
         private void InitializeProgressBarTimer()
@@ -32,11 +32,11 @@ namespace MP3Player
 
         private void ProgressBarTimer_Tick(object sender, EventArgs e)
         {
-            if (WindowsMediaPlayer != null && WindowsMediaPlayer.currentMedia != null)
+            if (windowsMediaPlayer != null && windowsMediaPlayer.currentMedia != null)
             {
                 // Update the progress bar value
-                progressBar1.Maximum = (int)WindowsMediaPlayer.currentMedia.duration;
-                progressBar1.Value = (int)WindowsMediaPlayer.controls.currentPosition;
+                progressBar1.Maximum = (int)windowsMediaPlayer.currentMedia.duration;
+                progressBar1.Value = (int)windowsMediaPlayer.controls.currentPosition;
             }
         }
 
@@ -56,26 +56,26 @@ namespace MP3Player
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            if (WindowsMediaPlayer != null && !string.IsNullOrEmpty(openFileDialog1.FileName))
+            if (windowsMediaPlayer != null && !string.IsNullOrEmpty(openFileDialog1.FileName))
             {
-                WindowsMediaPlayer.URL = openFileDialog1.FileName;
-                WindowsMediaPlayer.controls.play();
+                windowsMediaPlayer.URL = openFileDialog1.FileName;
+                windowsMediaPlayer.controls.play();
             }
         }
 
         private void btnPause_Click(object sender, EventArgs e)
         {
-            if (WindowsMediaPlayer != null)
+            if (windowsMediaPlayer != null)
             {
-                WindowsMediaPlayer.controls.pause();
+                windowsMediaPlayer.controls.pause();
             }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            if (WindowsMediaPlayer != null)
+            if (windowsMediaPlayer != null)
             {
-                WindowsMediaPlayer.controls.stop();
+                windowsMediaPlayer.controls.stop();
                 label1.Text = "No file loaded";
                 progressBar1.Value = 0; // Reset progress bar
             }
@@ -86,7 +86,7 @@ namespace MP3Player
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 label1.Text = openFileDialog1.FileName;
-                WindowsMediaPlayer.URL = openFileDialog1.FileName;
+                windowsMediaPlayer.URL = openFileDialog1.FileName;
             }
         }
 
@@ -97,9 +97,25 @@ namespace MP3Player
 
         private void btnResume_Click(object sender, EventArgs e)
         {
-            if (WindowsMediaPlayer != null && WindowsMediaPlayer.playState == WMPPlayState.wmppsPaused)
+            if (windowsMediaPlayer != null && windowsMediaPlayer.playState == WMPPlayState.wmppsPaused)
             {
-                WindowsMediaPlayer.controls.play(); // Resume playback from the current position
+                windowsMediaPlayer.controls.play(); // Resume playback from the current position
+            }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            if (windowsMediaPlayer != null)
+            {
+                windowsMediaPlayer.controls.currentPosition = 0; // Restart the song from the beginning
+            }
+        }
+
+        private void btnFwd_Click(object sender, EventArgs e)
+        {
+            if (windowsMediaPlayer != null && windowsMediaPlayer.currentMedia != null)
+            {
+                windowsMediaPlayer.controls.currentPosition += 5; // Forward by 5 seconds
             }
         }
     }
