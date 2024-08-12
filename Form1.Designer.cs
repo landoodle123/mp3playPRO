@@ -13,6 +13,7 @@ namespace MP3Player
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ProgressBar progressBar1; // Progress bar declaration
+        private System.Windows.Forms.Button back;
 
         protected override void Dispose(bool disposing)
         {
@@ -33,33 +34,35 @@ namespace MP3Player
             label1 = new Label();
             button1 = new Button();
             progressBar1 = new ProgressBar();
+            back = new Button();
+            fwd = new Button();
             SuspendLayout();
             // 
             // btnPause
             // 
             btnPause.Image = (Image)resources.GetObject("btnPause.Image");
-            btnPause.Location = new Point(11, 12);
+            btnPause.Location = new Point(221, 12);
             btnPause.Name = "btnPause";
-            btnPause.Size = new Size(138, 98);
+            btnPause.Size = new Size(138, 122);
             btnPause.TabIndex = 2;
             btnPause.UseVisualStyleBackColor = true;
             btnPause.Click += btnPause_Click;
             // 
             // btnStop
             // 
-            btnStop.Image = (Image)resources.GetObject("btnStop.Image");
-            btnStop.Location = new Point(12, 116);
+            btnStop.Location = new Point(12, 74);
             btnStop.Name = "btnStop";
-            btnStop.Size = new Size(137, 60);
+            btnStop.Size = new Size(56, 27);
             btnStop.TabIndex = 3;
+            btnStop.Text = "Stop";
             btnStop.UseVisualStyleBackColor = true;
             btnStop.Click += btnStop_Click;
             // 
             // btnOpenFile
             // 
-            btnOpenFile.Location = new Point(155, 12);
+            btnOpenFile.Location = new Point(73, 76);
             btnOpenFile.Name = "btnOpenFile";
-            btnOpenFile.Size = new Size(204, 98);
+            btnOpenFile.Size = new Size(76, 25);
             btnOpenFile.TabIndex = 4;
             btnOpenFile.Text = "Open File";
             btnOpenFile.UseVisualStyleBackColor = true;
@@ -73,7 +76,7 @@ namespace MP3Player
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(159, 119);
+            label1.Location = new Point(12, 12);
             label1.MaximumSize = new Size(200, 0);
             label1.Name = "label1";
             label1.Size = new Size(81, 15);
@@ -85,9 +88,9 @@ namespace MP3Player
             // 
             button1.Enabled = false;
             button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(12, 12);
+            button1.Location = new Point(221, 12);
             button1.Name = "button1";
-            button1.Size = new Size(137, 98);
+            button1.Size = new Size(137, 122);
             button1.TabIndex = 6;
             button1.UseVisualStyleBackColor = true;
             button1.Visible = false;
@@ -95,17 +98,39 @@ namespace MP3Player
             // 
             // progressBar1
             // 
-            progressBar1.Location = new Point(12, 182);
+            progressBar1.Location = new Point(12, 45);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(347, 23);
+            progressBar1.Size = new Size(203, 23);
             progressBar1.Style = ProgressBarStyle.Continuous;
             progressBar1.TabIndex = 7;
+            // 
+            // back
+            // 
+            back.Image = (Image)resources.GetObject("back.Image");
+            back.Location = new Point(221, 140);
+            back.Name = "back";
+            back.Size = new Size(60, 60);
+            back.TabIndex = 8;
+            back.UseVisualStyleBackColor = true;
+            back.Click += btnBack_Click;
+            // 
+            // fwd
+            // 
+            fwd.Image = (Image)resources.GetObject("fwd.Image");
+            fwd.Location = new Point(298, 140);
+            fwd.Name = "fwd";
+            fwd.Size = new Size(60, 60);
+            fwd.TabIndex = 9;
+            fwd.UseVisualStyleBackColor = true;
+            this.fwd.Click += new System.EventHandler(this.btnFwd_Click);
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(365, 220);
+            Controls.Add(fwd);
+            Controls.Add(back);
             Controls.Add(progressBar1);
             Controls.Add(button1);
             Controls.Add(label1);
@@ -118,5 +143,7 @@ namespace MP3Player
             ResumeLayout(false);
             PerformLayout();
         }
+
+        private Button fwd;
     }
 }
