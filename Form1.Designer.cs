@@ -12,7 +12,6 @@ namespace MP3Player
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ProgressBar progressBar1; // Progress bar declaration
         private System.Windows.Forms.Button back;
 
         protected override void Dispose(bool disposing)
@@ -33,9 +32,13 @@ namespace MP3Player
             openFileDialog1 = new OpenFileDialog();
             label1 = new Label();
             button1 = new Button();
-            progressBar1 = new ProgressBar();
             back = new Button();
             fwd = new Button();
+            trackBar1 = new TrackBar();
+            volctrl = new Label();
+            progress = new TrackBar();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)progress).BeginInit();
             SuspendLayout();
             // 
             // btnPause
@@ -76,7 +79,7 @@ namespace MP3Player
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 12);
+            label1.Location = new Point(73, 119);
             label1.MaximumSize = new Size(200, 0);
             label1.Name = "label1";
             label1.Size = new Size(81, 15);
@@ -96,14 +99,6 @@ namespace MP3Player
             button1.Visible = false;
             button1.Click += btnResume_Click;
             // 
-            // progressBar1
-            // 
-            progressBar1.Location = new Point(12, 45);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(203, 23);
-            progressBar1.Style = ProgressBarStyle.Continuous;
-            progressBar1.TabIndex = 7;
-            // 
             // back
             // 
             back.Image = (Image)resources.GetObject("back.Image");
@@ -122,28 +117,66 @@ namespace MP3Player
             fwd.Size = new Size(60, 60);
             fwd.TabIndex = 9;
             fwd.UseVisualStyleBackColor = true;
-            this.fwd.Click += new System.EventHandler(this.btnFwd_Click);
+            fwd.Click += btnFwd_Click;
+            // 
+            // trackBar1
+            // 
+            trackBar1.Location = new Point(155, 74);
+            trackBar1.Maximum = 100;
+            trackBar1.Name = "trackBar1";
+            trackBar1.Size = new Size(60, 45);
+            trackBar1.SmallChange = 5;
+            trackBar1.TabIndex = 10;
+            trackBar1.TickFrequency = 5;
+            trackBar1.Value = 50;
+            trackBar1.Scroll += trackBar1_Scroll;
+            trackBar1.ValueChanged += trackBar1_ValueChanged;
+            // 
+            // volctrl
+            // 
+            volctrl.AutoSize = true;
+            volctrl.Font = new Font("Segoe UI", 6F);
+            volctrl.Location = new Point(155, 98);
+            volctrl.Name = "volctrl";
+            volctrl.Size = new Size(62, 11);
+            volctrl.TabIndex = 11;
+            volctrl.Text = "Volume Control";
+            // 
+            // progress
+            // 
+            progress.Location = new Point(10, 12);
+            progress.Name = "progress";
+            progress.Size = new Size(205, 45);
+            progress.TabIndex = 12;
+            progress.Scroll += progress_Scroll;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(365, 220);
+            Controls.Add(volctrl);
+            Controls.Add(trackBar1);
             Controls.Add(fwd);
             Controls.Add(back);
-            Controls.Add(progressBar1);
             Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(btnOpenFile);
             Controls.Add(btnStop);
             Controls.Add(btnPause);
+            Controls.Add(progress);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "mp3playPRO";
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)progress).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         private Button fwd;
+        private TrackBar trackBar1;
+        private Label volctrl;
+        private TrackBar progress;
     }
 }
