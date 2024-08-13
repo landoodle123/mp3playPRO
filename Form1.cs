@@ -35,8 +35,8 @@ namespace MP3Player
             if (windowsMediaPlayer != null && windowsMediaPlayer.currentMedia != null)
             {
                 // Update the progress bar value
-                progressBar1.Maximum = (int)windowsMediaPlayer.currentMedia.duration;
-                progressBar1.Value = (int)windowsMediaPlayer.controls.currentPosition;
+                progress.Maximum = (int)windowsMediaPlayer.currentMedia.duration;
+                progress.Value = (int)windowsMediaPlayer.controls.currentPosition;
             }
         }
 
@@ -77,7 +77,7 @@ namespace MP3Player
             {
                 windowsMediaPlayer.controls.stop();
                 label1.Text = "No file loaded";
-                progressBar1.Value = 0; // Reset progress bar
+                progress.Value = 0; // Reset progress bar
             }
         }
 
@@ -118,5 +118,28 @@ namespace MP3Player
                 windowsMediaPlayer.controls.currentPosition += 5; // Forward by 5 seconds
             }
         }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+        }
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            if (windowsMediaPlayer != null)
+            {
+                int snappedValue = (trackBar1.Value / 5) * 5;
+                windowsMediaPlayer.settings.volume = snappedValue;
+                trackBar1.Value = snappedValue;
+            }
+        }
+        private void progress_Scroll(object sender, EventArgs e)
+        {
+            if (windowsMediaPlayer != null && windowsMediaPlayer.currentMedia != null)
+            {
+                // Set the current position of the media to match the trackBar value
+                windowsMediaPlayer.controls.currentPosition = progress.Value;
+            }
+        }
+
     }
 }
